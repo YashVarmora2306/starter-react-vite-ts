@@ -45,7 +45,7 @@ export default [
       ...reactHooks.configs.recommended.rules, 
       ...tsPlugin.configs.recommended.rules, 
       ...tsPlugin.configs['recommended-requiring-type-checking'].rules, 
-      'prettier/prettier': 'error',
+      ...prettierPlugin.configs.recommended.rules, 
       ...tailwindcssPlugin.configs.recommended.rules,
 
       'react/react-in-jsx-scope': 'off',
