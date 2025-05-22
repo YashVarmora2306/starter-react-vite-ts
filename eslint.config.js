@@ -6,82 +6,74 @@ import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import prettierPlugin from 'eslint-plugin-prettier';
 import tailwindcssPlugin from 'eslint-plugin-tailwindcss';
+import globals from "globals"
 
-export default {
-  ignores: ['dist', 'build', 'node_modules'],
-  languageOptions: {
-    parser: tsParser,
-    parserOptions: {
-      ecmaVersion: 2021,
-      sourceType: 'module',
-      ecmaFeatures: { jsx: true },
-      project: './tsconfig.json',
-    },
-    globals: {
-      browser: true,
-      es2021: true,
-    },
-  },
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  plugins: {
-    react: reactPlugin,
-    'react-hooks': reactHooks,
-    'react-refresh': reactRefresh,
-    '@typescript-eslint': tsPlugin,
-    prettier: prettierPlugin,
-    tailwindcss: tailwindcssPlugin,
-  },
-  settings: {
-    react: {
-      version: 'detect',
-      jsxRuntime: 'automatic',
-    },
-  },
-  extends: [
-    js.configs.recommended,
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:prettier/recommended',
-    'plugin:tailwindcss/recommended',
-  ],
-  rules: {
-    // React
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
-    // Hooks
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    // React refresh
-    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    // TypeScript
-    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/no-non-null-assertion': 'warn',
-    '@typescript-eslint/explicit-module-boundary-types': 'warn',
-    // General
-    'no-console': ['warn', { allow: ['warn', 'error'] }],
-    eqeqeq: ['error', 'always'],
-    curly: ['error', 'all'],
-    'prefer-const': 'error',
-    'no-var': 'error',
-    semi: ['error', 'always'],
-    quotes: ['error', 'single', { avoidEscape: true }],
-    indent: ['error', 2],
-    'comma-dangle': ['error', 'only-multiline'],
-  },
-  overrides: [
-    {
-      files: ['*.js', '*.jsx'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
+export default [
+  {
+    files: ['src/**/*.{ts,tsx,js,jsx}'],
+    ignores: ['dist', 'build', 'node_modules'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
+        project: ['./tsconfig.app.json', './tsconfig.node.json'],
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
       },
     },
-  ],
-};
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      '@typescript-eslint': tsPlugin,
+      prettier: prettierPlugin,
+      tailwindcss: tailwindcssPlugin,
+    },
+    settings: {
+      react: {
+        version: 'detect',
+        jsxRuntime: 'automatic',
+      },
+    },
+    rules: {
+      ...js.configs.recommended.rules, 
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules, 
+      ...tsPlugin.configs.recommended.rules, 
+      ...tsPlugin.configs['recommended-requiring-type-checking'].rules, 
+      ...prettierPlugin.configs.recommended.rules, 
+      ...tailwindcssPlugin.configs.recommended.rules,
+
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-non-null-assertion': 'warn',
+      '@typescript-eslint/explicit-module-boundary-types': 'warn',
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
+      'prefer-const': 'error',
+      'no-var': 'error',
+      semi: ['error', 'always'],
+      quotes: ['error', 'single', { avoidEscape: true }],
+      indent: ['error', 2],
+      'comma-dangle': ['error', 'only-multiline'],
+    },
+  },
+  {
+    files: ['*.js', '*.jsx'],
+    rules: {
+      '@typescript-eslint/no-var-requires': 'off',
+    },
+  },
+];
