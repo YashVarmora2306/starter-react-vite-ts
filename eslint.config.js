@@ -4,15 +4,23 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import reactPlugin from 'eslint-plugin-react';
 import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import prettierPlugin from 'eslint-plugin-prettier';
+import tailwindcssPlugin from 'eslint-plugin-tailwindcss';
 
 export default {
   ignores: ['dist', 'build', 'node_modules'],
-  parser: tsParser,
-  parserOptions: {
-    ecmaVersion: 2021,
-    sourceType: 'module',
-    ecmaFeatures: { jsx: true },
-    project: './tsconfig.json',
+  languageOptions: {
+    parser: tsParser,
+    parserOptions: {
+      ecmaVersion: 2021,
+      sourceType: 'module',
+      ecmaFeatures: { jsx: true },
+      project: './tsconfig.json',
+    },
+    globals: {
+      browser: true,
+      es2021: true,
+    },
   },
   env: {
     browser: true,
@@ -23,8 +31,8 @@ export default {
     'react-hooks': reactHooks,
     'react-refresh': reactRefresh,
     '@typescript-eslint': tsPlugin,
-    prettier: require('eslint-plugin-prettier'),
-    tailwindcss: require('eslint-plugin-tailwindcss'),
+    prettier: prettierPlugin,
+    tailwindcss: tailwindcssPlugin,
   },
   settings: {
     react: {

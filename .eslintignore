@@ -1,9 +1,0 @@
-node_modules
-dist
-build
-public
-.husky
-*.config.js
-*.cjs
-*.mjs
-vite.config.js

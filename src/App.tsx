@@ -1,10 +1,11 @@
-import React from 'react'
-
+import React from 'react';
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div>
+      <h1>HellodvDkjvsdjvsjsn sdnvs ksd jsbdjsd d jm jsd sd</h1>
+    </div>
+  );
+};
 
-export default App
+export default App;
