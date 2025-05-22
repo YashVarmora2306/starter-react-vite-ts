@@ -23,6 +23,10 @@ const App: React.FC = () => {
     <div>
       <h1>{message}</h1> {/* ESLint: react/jsx-filename-extension */}
       <p>{getGreeting('Grok') ? 'Valid' : 'Invalid'}</p>
+      <h1>{message}</h1> {/* ESLint: react/jsx-filename-extension */}
+      <p>{getGreeting('Grok') ? 'Valid' : 'Invalid'}</p>
+      <h1>{message}</h1> {/* ESLint: react/jsx-filename-extension */}
+      <p>{getGreeting('Grok') ? 'Valid' : 'Invalid'}</p>
     </div>
   );
 };
